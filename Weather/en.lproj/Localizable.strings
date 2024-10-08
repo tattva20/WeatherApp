@@ -1,0 +1,23 @@
+/* 
+  Localizable.strings
+  Weather
+
+  Created by Octavio Rojas on 10/8/24.
+  
+*/
+
+"weather_app_title" = "Weather App";
+"please_enter_city" = "Please enter a city";
+"enter_city_placeholder" = "Enter city";
+"get_weather_report" = "Get Weather Report";
+"error_title" = "Error";
+"ok_button" = "OK";
+"weather_in" = "Weather in %@";
+"temperature_label" = "Temperature: %@°F";
+"condition_label" = "Condition: %@";
+"go_back_button" = "Go back";
+"location_label" = "Location";
+"cannot_retrieve_weather" = "Cannot retrieve weather data.";
+"error_title" = "Error";
+"get_weather_report" = "Get weather report";
+"get_weather_report_hint" = "Fetches the weather information for the entered city.";

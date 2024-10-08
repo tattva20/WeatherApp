@@ -9,33 +9,67 @@ import XCTest
 
 final class WeatherUITests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    var app: XCUIApplication!
 
+    override func setUpWithError() throws {
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
 
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        app = XCUIApplication()
+
+        // Add an interruption monitor to handle location permission alerts
+        addUIInterruptionMonitor(withDescription: "Location Permission") { alert -> Bool in
+            if alert.buttons["Allow While Using App"].exists {
+                alert.buttons["Allow While Using App"].tap()
+                return true
+            }
+            if alert.buttons["Don’t Allow"].exists {
+                alert.buttons["Don’t Allow"].tap()
+                return true
+            }
+            return false
+        }
+
+        // Launch the app
+        app.launch()
+
+        // Trigger the interruption monitor by interacting with the app
+        // For example, tapping the screen to ensure the alert is presented
+        app.tap()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        app = nil
     }
 
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
+    // Test searching for weather in a city
+    func testSearchCityWeather() throws {
+        let cityTextField = app.textFields["enter_city_textfield"]
+        XCTAssertTrue(cityTextField.exists, "City text field should exist")
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        cityTextField.clearText()
+        cityTextField.tap()
+        cityTextField.typeText("San Francisco")
+
+        let getWeatherButton = app.buttons["get_weather_report_button"]
+        XCTAssertTrue(getWeatherButton.exists, "Get Weather Report button should exist")
+        getWeatherButton.tap()
+
+        let weatherLabel = app.staticTexts["weather_in_label"]
+        XCTAssertTrue(weatherLabel.waitForExistence(timeout: 10), "Weather details should be displayed for San Francisco")
     }
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
+}
+
+extension XCUIElement {
+    /// Clears the text of a text field by deleting each character.
+    func clearText() {
+        guard let stringValue = self.value as? String else {
+            return
+        }
+        self.tap()
+        for _ in stringValue {
+            self.typeText(XCUIKeyboardKey.delete.rawValue)
         }
     }
 }

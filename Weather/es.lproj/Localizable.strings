@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  Weather
+
+  Created by Octavio Rojas on 10/8/24.
+  
+*/
+
+"weather_app_title" = "App Climática";
+"please_enter_city" = "Por favor ingrese una ciudad";
+"enter_city_placeholder" = "Ingrese la ciudad";
+"get_weather_report" = "Obtener informe del clima";
+"error_title" = "Error";
+"ok_button" = "OK";
+"weather_in" = "Clima en %@";
+"temperature_label" = "Temperatura: %@°F";
+"condition_label" = "Condición: %@";
+"go_back_button" = "Regresar";
+"location_label" = "Ubicación";
+"cannot_retrieve_weather" = "No se pueden recuperar los datos del clima.";
+"get_weather_report" = "Obtener informe del clima";
+"get_weather_report_hint" = "Obtiene la información del clima para la ciudad ingresada.";
