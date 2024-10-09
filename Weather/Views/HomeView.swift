@@ -83,7 +83,7 @@ struct HomeView: View {
             }
             .accessibilityLabel(NSLocalizedString("get_weather_report", comment: "Button to get weather report"))
             .accessibilityIdentifier("get_weather_report_button")
-             .accessibilityHint(NSLocalizedString("get_weather_report_hint", comment: "Hint for get weather report button"))
+            .accessibilityHint(NSLocalizedString("get_weather_report_hint", comment: "Hint for get weather report button"))
             Spacer()
         }
     }
